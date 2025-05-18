@@ -1,5 +1,57 @@
+<!-- views/index.ejs -->
+<%- include('partials/head') %> 
 <%- include('partials/header') %>
 <%- include('partials/navigation') %>
-<h1>Walter Munoasosa</h1>
+
+<main class="container">
+    <section class="welcome">
+        <h1>Welcome to CSE Motors!</h1>
+        <div class="welcome-text">
+            <h2 class="highlight">DMC Delorean</h2>
+            <ul>
+                <li>3 Cup holders</li>
+                <li>Superman doors</li>
+                <li>Fuzzy dice!</li>
+            </ul>
+            <a href="#" class="btn">Own Today</a>
+        </div>
+        <img src="/images/vehicles/delorean.jpg" alt="DMC Delorean">
+    </section>
+
+    <section class="upgrades">
+        <h2>Delorean Upgrades</h2>
+
+        <div class="flux-cap">
+            <img src="/images/upgrades/flux-cap.png" alt="Flux Capacitor">
+            <p><a href="#">Flux Capacitor</a></p>
+        </div>
+
+        <div class="flame-decals">
+            <img src="/images/upgrades/flame.jpg" alt="Flame Decals">
+            <p><a href="#">Flame Decals</a></p>
+        </div>
+
+        <div class="bumper-sticker">
+            <img src="/images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers">
+            <p><a href="#">Bumper Stickers</a></p>
+        </div>
+
+        <div class="hub-cap">
+            <img src="/images/upgrades/hub-cap.jpg" alt="Hub Caps">
+            <p><a href="#">Hub Caps</a></p>
+        </div>
+    </section>
+
+    <section class="review-section">
+        <h2>DMC Delorean Reviews</h2>
+        <ul>
+            <li>“So fast it's almost like traveling in time.” (4/5)</li>
+            <li>“Coolest ride on the road.” (4/5)</li>
+            <li>“I'm feeling McFly!” (5/5)</li>
+            <li>“The most futuristic ride of our day.” (4.5/5)</li>
+            <li>“80's livin and I love it!” (5/5)</li>
+        </ul>
+    </section>
+</main>
 
 <%- include('partials/footer') %>
