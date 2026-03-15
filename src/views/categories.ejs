@@ -1,30 +1,21 @@
 <%- include('partials/header') %>
-    <h1>
-        <%= title %>
-    </h1>
+    <main>
+        <h1>
+            <%= title %>
+        </h1>
 
-    <ol class="card-grid">
-        <li class="card">
-            <img src="/images/cse340-service-network.png" alt="Environmental">
-            <div class="card-content">
-                <h3>Environmental</h3>
-                <p>Projects focused on improving our local environment through cleanup and planting.</p>
-            </div>
-        </li>
-        <li class="card">
-            <img src="/images/cse340-service-network.png" alt="Social">
-            <div class="card-content">
-                <h3>Social</h3>
-                <p>Opportunities to interact with and help people in the community directly.</p>
-            </div>
-        </li>
-        <li class="card">
-            <img src="/images/cse340-service-network.png" alt="Educational">
-            <div class="card-content">
-                <h3>Educational</h3>
-                <p>Teaching, mentoring, and skill-sharing programs for youth and adults.</p>
-            </div>
-        </li>
-    </ol>
+        <p>Browse our service project categories:</p>
+        <ol class="card-grid">
+            <% categories.forEach(category=> { %>
+                <li class="card">
+                    <div class="card-content">
+                        <h3>
+                            <%= category.name %>
+                        </h3>
+                    </div>
+                </li>
+                <% }); %>
+        </ol>
+    </main>
 
     <%- include('partials/footer') %>

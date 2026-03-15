@@ -60,3 +60,71 @@ INSERT INTO service_project (organization_id, title, description, location, date
 (3, 'Youth Mentorship Day', 'Pairing volunteers with at-risk youth for career guidance workshops.', 'Unity Community Hall', '2025-05-17'),
 (3, 'Beach Cleanup Drive', 'Removing trash and debris from the local shoreline.', 'Lakewood Beach', '2025-06-08'),
 (3, 'Charity Run Organization', 'Coordinating a 5K run to raise funds for local shelters.', 'City Sports Park', '2025-07-12');
+
+-- Tabla 1: categorías
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Tabla 2: tabla intermedia (junction table) que conecta proyectos con categorías
+CREATE TABLE project_category (
+    project_id  INT NOT NULL,
+    category_id INT NOT NULL,
+
+    PRIMARY KEY (project_id, category_id),
+
+    CONSTRAINT fk_project
+        FOREIGN KEY (project_id)
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_category
+        FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+        ON DELETE CASCADE
+);
+
+INSERT INTO category (name) VALUES
+('Construction & Infrastructure'),
+('Environment & Sustainability'),
+('Food & Nutrition'),
+('Education & Mentorship'),
+('Community Support');
+
+-- BrightFuture Builders (projects 1-5)
+INSERT INTO project_category (project_id, category_id) VALUES
+(1, 1),  -- Community Park Renovation → Construction
+(1, 2),  -- Community Park Renovation → Environment
+(2, 1),  -- Affordable Housing Repairs → Construction
+(2, 5),  -- Affordable Housing Repairs → Community Support
+(3, 1),  -- School Building Upgrade → Construction
+(3, 4),  -- School Building Upgrade → Education
+(4, 1),  -- Flood-Resistant Roads → Construction
+(4, 2),  -- Flood-Resistant Roads → Environment
+(5, 1),  -- Community Center Construction → Construction
+(5, 5),  -- Community Center Construction → Community Support
+
+-- GreenHarvest Growers (projects 6-10)
+(6, 2),  -- Rooftop Garden → Environment
+(6, 3),  -- Rooftop Garden → Food
+(7, 3),  -- School Garden → Food
+(7, 4),  -- School Garden → Education
+(8, 3),  -- Farmers Market → Food
+(8, 5),  -- Farmers Market → Community Support
+(9, 2),  -- Composting Workshops → Environment
+(9, 4),  -- Composting Workshops → Education
+(10, 2), -- Hydroponic Lab → Environment
+(10, 3), -- Hydroponic Lab → Food
+
+-- UnityServe Volunteers (projects 11-15)
+(11, 3), -- Food Drive → Food
+(11, 5), -- Food Drive → Community Support
+(12, 4), -- Elder Care → Education
+(12, 5), -- Elder Care → Community Support
+(13, 4), -- Youth Mentorship → Education
+(13, 5), -- Youth Mentorship → Community Support
+(14, 2), -- Beach Cleanup → Environment
+(14, 5), -- Beach Cleanup → Community Support
+(15, 4), -- Charity Run → Education
+(15, 5); -- Charity Run → Community Support
