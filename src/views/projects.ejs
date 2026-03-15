@@ -1,24 +1,22 @@
 <%- include('partials/header') %>
-    <h1>
-        <%= title %>
-    </h1>
+    <main>
+        <h1>
+            <%= title %>
+        </h1>
 
-    <article class="project-item">
-        <h2>Community Garden Cleanup</h2>
-        <p>Join us this Saturday to help beautify our local park. We will be planting flowers, weeding, and painting benches to create a welcoming space for everyone.</p>
-        <button>Learn More</button>
-    </article>
-
-    <article class="project-item">
-        <h2>Food Bank Sorting</h2>
-        <p>Help organize donated food items at the downtown food bank. Your assistance ensures that families in need receive fresh and non-perishable goods quickly.</p>
-        <button>Learn More</button>
-    </article>
-
-    <article class="project-item">
-        <h2>Tech Tutoring for Seniors</h2>
-        <p>Share your digital skills! We need volunteers to teach seniors how to use smartphones and tablets to stay connected with their loved ones.</p>
-        <button>Learn More</button>
-    </article>
+        <p>Here are our upcoming service projects:</p>
+        <ul>
+            <% projects.forEach(project=> { %>
+                <li>
+                    <strong>
+                        <%= new Date(project.date).toLocaleDateString('en-US', { year: 'numeric' , month: 'long' ,
+                            day: 'numeric' , timeZone: 'UTC' }) %>:
+                            <%= project.title %>
+                    </strong>
+                    (<%= project.organization_name %>)
+                </li>
+                <% }); %>
+        </ul>
+    </main>
 
     <%- include('partials/footer') %>
