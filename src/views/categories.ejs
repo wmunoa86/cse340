@@ -1,21 +1,19 @@
 <%- include('partials/header') %>
     <main>
         <h1>
-            <%= title %>
+<%= title %>
         </h1>
-
         <p>Browse our service project categories:</p>
         <ol class="card-grid">
-            <% categories.forEach(category=> { %>
+<% categories.forEach(category=> { %>
                 <li class="card">
                     <div class="card-content">
                         <h3>
-                            <%= category.name %>
+                            <a href="/category/<%= category.category_id %>"><%= category.name %></a>
                         </h3>
                     </div>
                 </li>
-                <% }); %>
+<% }); %>
         </ol>
     </main>
-
-    <%- include('partials/footer') %>
+<%- include('partials/footer') %>
