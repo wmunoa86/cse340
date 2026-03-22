@@ -51,8 +51,7 @@ const getUpcomingProjects = async (number_of_projects) => {
             o.name AS organization_name
         FROM public.service_project sp
         JOIN public.organizations o ON sp.organization_id = o.organization_id
-        WHERE sp.date >= CURRENT_DATE
-        ORDER BY sp.date ASC
+        ORDER BY sp.date DESC
         LIMIT $1;
     `;
 
