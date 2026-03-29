@@ -82,5 +82,40 @@ const getProjectDetails = async (id) => {
     return result.rows.length > 0 ? result.rows[0] : null;
 };
 
+const createProject = async (title, description, location, date, organizationId) => {
+    const query = `
+        INSERT INTO public.service_project (title, description, location, date, organization_id)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING project_id
+    `;
+
+    const query_params = [title, description, location, date, organizationId];
+    const result = await db.query(query, query_params);
+
+    if (result.rows.length === 0) {
+        throw new Error('Failed to create project');
+    }
+
+    return result.rows[0].project_id;
+};
+
+const updateProject = async (projectId, title, description, location, date, organizationId) => {
+    const query = `
+        UPDATE public.service_project
+        SET title = $1, description = $2, location = $3, date = $4, organization_id = $5
+        WHERE project_id = $6
+        RETURNING project_id
+    `;
+
+    const query_params = [title, description, location, date, organizationId, projectId];
+    const result = await db.query(query, query_params);
+
+    if (result.rows.length === 0) {
+        throw new Error('Failed to update project');
+    }
+
+    return result.rows[0].project_id;
+};
+
 // Export the model functions
-export { getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails };
+export { getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails, createProject, updateProject };

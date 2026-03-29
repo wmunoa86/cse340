@@ -15,7 +15,7 @@
     <header>
         <nav>
             <a href="/" class="logo-link">
-                <img src="/images/cse340-service-network.png" alt="CSE 340 Logo" class="logo">
+                <img src="/images/placeholder-logo.png" alt="CSE 340 Logo" class="logo">
             </a>
             <div class="nav-toggle-label">
                 <span></span>
@@ -30,3 +30,13 @@
     </header>
 
     <main>
+        <% const messages = flash(); %>
+        <% Object.keys(messages).forEach(type => { %>
+            <% if (messages[type].length > 0) { %>
+                <div class="alert <%= type %>">
+                    <% messages[type].forEach(msg => { %>
+                        <p><%= msg %></p>
+                    <% }); %>
+                </div>
+            <% } %>
+        <% }); %>

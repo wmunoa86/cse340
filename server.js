@@ -1,23 +1,18 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import session from 'express-session';
 import { testConnection } from './src/models/db.js';
 import router from './src/controllers/routes.js';
+import flash from './src/middleware/flash.js';
 
-// Define the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
-
-// Define the port number the server will listen on
 const PORT = process.env.PORT || 3000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-
-/**
-  * Configure Express middleware
-  */
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,6 +36,21 @@ app.use((req, res, next) => {
     res.locals.NODE_ENV = NODE_ENV;
     next();
 });
+
+// Sessions
+app.use(session({
+    secret: 'cse340-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }
+}));
+
+// Flash messages
+app.use(flash);
+
+// Allow Express to receive and process common POST data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Use the imported router to handle routes
 app.use(router);
