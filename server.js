@@ -48,9 +48,13 @@ app.use(session({
 // Flash messages
 app.use(flash);
 
-// Make login state available to all templates
+// Make login state and user available to all templates
 app.use((req, res, next) => {
-    res.locals.isLoggedIn = !!req.session.user;
+    res.locals.isLoggedIn = false;
+    if (req.session && req.session.user) {
+        res.locals.isLoggedIn = true;
+    }
+    res.locals.user = req.session.user || null;
     next();
 });
 
