@@ -48,6 +48,12 @@ app.use(session({
 // Flash messages
 app.use(flash);
 
+// Make login state available to all templates
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = !!req.session.user;
+    next();
+});
+
 // Allow Express to receive and process common POST data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

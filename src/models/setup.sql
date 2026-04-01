@@ -128,3 +128,26 @@ INSERT INTO project_category (project_id, category_id) VALUES
 (14, 5), -- Beach Cleanup → Community Support
 (15, 4), -- Charity Run → Education
 (15, 5); -- Charity Run → Community Support
+
+-- Week 05: Authentication tables
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    description TEXT
+);
+
+INSERT INTO roles (name, description) VALUES
+('user', 'Standard user with basic access'),
+('admin', 'Administrator with full system access');
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INT NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT fk_role
+        FOREIGN KEY (role_id)
+        REFERENCES roles(role_id)
+);
