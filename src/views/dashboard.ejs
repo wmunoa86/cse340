@@ -4,6 +4,9 @@
     <h1>Dashboard</h1>
     <p>Welcome, <strong><%= user.name %></strong>!</p>
     <p>Email: <%= user.email %></p>
+    <% if (user && user.role_name === 'admin') { %>
+        <p><a href="/users">View All Users</a></p>
+    <% } %>
     <p><a href="/logout">Log out</a></p>
 </section>
 

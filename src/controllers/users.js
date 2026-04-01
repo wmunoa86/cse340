@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { createUser, authenticateUser } from '../models/users.js';
+import { createUser, authenticateUser, getAllUsers } from '../models/users.js';
 
 const SALT_ROUNDS = 10;
 
@@ -53,6 +53,11 @@ const showDashboard = (req, res) => {
     res.render('dashboard', { title: 'Dashboard', user: req.session.user });
 };
 
+const showUsersPage = async (req, res) => {
+    const users = await getAllUsers();
+    res.render('users', { title: 'Registered Users', users });
+};
+
 const requireRole = (role) => {
     return (req, res, next) => {
         if (!req.session || !req.session.user) {
@@ -67,4 +72,4 @@ const requireRole = (role) => {
     };
 };
 
-export { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, showDashboard, requireRole };
+export { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, showDashboard, showUsersPage, requireRole };
