@@ -151,3 +151,22 @@ CREATE TABLE users (
         FOREIGN KEY (role_id)
         REFERENCES roles(role_id)
 );
+
+-- Week 06: Volunteering table (many-to-many: users <-> projects)
+CREATE TABLE project_volunteer (
+    user_id    INT NOT NULL,
+    project_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+
+    PRIMARY KEY (user_id, project_id),
+
+    CONSTRAINT fk_volunteer_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_volunteer_project
+        FOREIGN KEY (project_id)
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE
+);

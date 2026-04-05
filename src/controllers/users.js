@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { createUser, authenticateUser, getAllUsers } from '../models/users.js';
+import { getVolunteerProjectsByUserId } from '../models/projects.js';
 
 const SALT_ROUNDS = 10;
 
@@ -49,8 +50,9 @@ const processLogout = (req, res) => {
 };
 
 // Dashboard
-const showDashboard = (req, res) => {
-    res.render('dashboard', { title: 'Dashboard', user: req.session.user });
+const showDashboard = async (req, res) => {
+    const volunteerProjects = await getVolunteerProjectsByUserId(req.session.user.user_id);
+    res.render('dashboard', { title: 'Dashboard', user: req.session.user, volunteerProjects });
 };
 
 const showUsersPage = async (req, res) => {
